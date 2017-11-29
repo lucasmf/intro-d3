@@ -20,6 +20,10 @@
         fill: steelblue;
       }
 
+      .green-hover:hover {
+        fill: SeaGreen;
+      }
+
       .mychart text {
         fill: white;
         font: 10px sans-serif;
@@ -49,14 +53,18 @@
        * (Nem pense em fazer hardcoded :)).
        */
 
+      var maximo = Math.max(...dados);
+      var altura_barra = altura/dados.length;
+
       svg.selectAll('rect')
           .data(dados)
           .enter()
             .append('rect')
               .attr('x', 0) // A função com dois parâmetros pode entrar aqui
-              .attr('y', 0) // e aqui
-              .attr('width', 30)
-              .attr('height', 20);
+              .attr('y', (d, i) => (i*altura_barra)) // e aqui
+              .attr('width', (d, i) => d/maximo*largura)
+              .attr('height', altura_barra-1)
+              .classed("green-hover", true);
 
       /* Mais dicas :
        * - As barras ficam mais legíveis se não encostarem umas nas outras. Para isso

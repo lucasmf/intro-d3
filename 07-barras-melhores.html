@@ -77,11 +77,15 @@
       /*
        * As escalas
        */
-      var x = d3.scaleBand(); // Configure essa escala com domain, range e padding
+       var x = d3.scaleBand() // Configure essa escala com domain, range e padding
+                 .domain(["A", "B", "C", "D", "E", "F", "G"])
+                 .range([0, larguraSVG-margin.left-margin.right])
+                 .padding(0.2);
 
-      var y = d3.scaleLinear() // Configure essa escala com domain e range
-                               // Lembre que uma escala pode converter de 1..10 -> 100..1
 
+       var y = d3.scaleLinear() // Configure essa escala com domain e range
+                 .domain([0, d3.max(dados, (d, i) => d.valor) + 20])    // Lembre que uma escala pode converter de 1..10 -> 100..1
+                 .range([alturaSVG-margin.bottom-margin.top, 0])
       // === ATÉ DAQUI ===
 
       /*
